@@ -4,7 +4,7 @@ const uuidv1 = require('uuid/v1');
 
 const userSchema = new momgoose.Schema(
   {
-    name: {
+    first_name: {
       type: String,
       required: true,
       maxlength: 32,
