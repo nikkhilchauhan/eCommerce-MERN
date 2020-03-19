@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 
-const userSchema = new momgoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     first_name: {
       type: String,
@@ -30,7 +30,7 @@ const userSchema = new momgoose.Schema(
       required: true
     },
     salt: String,
-    role: {
+    is_admin: {
       type: Number,
       default: 0
     },
@@ -54,12 +54,12 @@ userSchema
     return this._password;
   });
 
-userSchema.method = {
-  authenticate: function() {
+userSchema.methods = {
+  authenticate: function(plainpassword) {
     return this.securePassword(plainpassword) === this.encry_password;
   },
   securePassword: function(plainpassword) {
-    if (!password) return '';
+    if (!plainpassword) return '';
     try {
       return crypto
         .createHmac('sha256', this.salt)
