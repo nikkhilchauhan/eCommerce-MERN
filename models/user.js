@@ -55,9 +55,7 @@ userSchema
   });
 
 userSchema.methods = {
-  authenticate: function(plainpassword) {
-    return this.securePassword(plainpassword) === this.encry_password;
-  },
+  // Encrypting plainpassword
   securePassword: function(plainpassword) {
     if (!plainpassword) return '';
     try {
@@ -68,6 +66,10 @@ userSchema.methods = {
     } catch (error) {
       return '';
     }
+  },
+  // User Authentication
+  authenticate: function(plainpassword) {
+    return this.securePassword(plainpassword) === this.encry_password;
   }
 };
 
