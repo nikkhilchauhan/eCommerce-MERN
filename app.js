@@ -11,12 +11,12 @@ mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then(() => {
     console.log('MongoDB is Connected');
   })
-  .catch(error => {
+  .catch((error) => {
     console.log(error);
   });
 
@@ -26,7 +26,8 @@ app.use(cookieParser());
 app.use(cors());
 
 // Routes
-app.use('/api', require('./routes/authentication'));
+app.use('/api', require('./routes/auth'));
+app.use('/api', require('./routes/user'));
 
 // Configuration for Nodejs
 const PORT = 8000;

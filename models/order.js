@@ -4,13 +4,13 @@ const { ObjectId } = mongoose.Schema;
 const productCartSchema = new mongoose.Schema({
   product: {
     type: ObjectId,
-    ref: 'Product'
+    ref: 'Product',
   },
   name: String,
   count: Number,
-  price: Number
+  price: Number,
 });
-const ProductCart = mongoose.model('Order', productCartSchema);
+const productCart = mongoose.model('ProductCart', productCartSchema);
 
 const orderSchema = new mongoose.Schema(
   {
@@ -21,10 +21,10 @@ const orderSchema = new mongoose.Schema(
     updated: Date,
     user: {
       type: ObjectId,
-      ref: 'User'
-    }
+      ref: 'User',
+    },
   },
   { timestamps: true }
 );
 const Order = mongoose.model('Order', orderSchema);
-module.exports = { Order, ProductCart };
+module.exports = { Order, productCart };

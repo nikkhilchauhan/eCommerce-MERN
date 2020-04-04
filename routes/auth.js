@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
+const { signout, signup, signin } = require('../controllers/auth');
+const { isSignedIn } = require('../middleware/auth');
 
-const {
-  signout,
-  signup,
-  signin,
-  isSignedIn
-} = require('../controllers/authentication');
-
-// SignUp route
+// @route: POST /api/signup
+// @desc: signup a user
+// @access: public
 router.post(
   '/signup',
   [
@@ -23,30 +20,29 @@ router.post(
     ).isLength({ max: 32 }),
     check('email', 'email is not valid!').isEmail(),
     check('password', 'password must be at least 6 character long!').isLength({
-      min: 6
-    })
+      min: 6,
+    }),
   ],
   signup
 );
 
-// SignIn route
+// @route: POST /api/signin
+// @desc: signin a user
+// @access: public
 router.post(
   '/signin',
   [
     check('email', 'invalid credentials!').isEmail(),
     check('password', 'invalid is credentials!').isLength({
-      min: 6
-    })
+      min: 6,
+    }),
   ],
   signin
 );
 
-//SignUp route
+// @route: GET /api/signout
+// @desc: signout a user
+// @access: private
 router.get('/signout', signout);
-
-// Test route
-router.get('/test', isSignedIn, (req, res) => {
-  res.json(req.auth);
-});
 
 module.exports = router;
