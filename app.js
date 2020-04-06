@@ -28,6 +28,7 @@ app.use(cors());
 // Routes
 app.use('/api', require('./routes/auth'));
 app.use('/api', require('./routes/user'));
+app.use('/api', require('./routes/category'));
 
 // Configuration for Nodejs
 const PORT = 8000;
