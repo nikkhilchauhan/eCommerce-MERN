@@ -1,3 +1,5 @@
+// @Note: req.category is comming from getCategoryById Middleware
+
 // @desc: create a new categoy
 exports.createCategory = (req, res) => {
   const category = new Category(req.body);

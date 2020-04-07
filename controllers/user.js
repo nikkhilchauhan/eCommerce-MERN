@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const Order = require('../models/Order');
 
+// @Note: req.profile is comming from getUserById Middleware
+
 //@desc: Get user by id
 exports.getUser = (req, res) => {
   // @Note: assigned 'undefined' so that it does't sends back to user
