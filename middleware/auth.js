@@ -1,7 +1,4 @@
-const { validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const User = require('../models/user');
 
 // MIDDLEWARE - Checks if user is loggedIn
 // Protected routes

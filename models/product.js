@@ -7,41 +7,41 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 32
+      maxlength: 32,
     },
     description: {
       type: String,
       trim: true,
       required: true,
-      maxlength: 1500
+      maxlength: 1500,
     },
     price: {
       type: String,
       trim: true,
       required: true,
-      maxlength: 32
+      maxlength: 32,
     },
     // Linking to Category Model
     category: {
       type: ObjectId,
       ref: 'Category',
-      required: true
+      required: true,
     },
     stock: {
-      type: Number
+      type: Number,
     },
     sold: {
       type: Number,
-      default: 0
+      default: 0,
     },
     photo: {
       data: Buffer,
-      contentType: String
-    }
+      contentType: String,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-module.exports = mongoose.Schema('Product', productSchema);
+module.exports = mongoose.model('Product', productSchema);

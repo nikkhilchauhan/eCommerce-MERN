@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getCategoryById,
   createCategory,
   getCategory,
   getAllCategory,
@@ -10,7 +9,8 @@ const {
   deleteCategory,
 } = require('../controllers/category');
 const { isSignedIn, isAuthenticated, isAdmin } = require('../middleware/auth');
-const { getUserById } = require('../controllers/user');
+const { getUserById } = require('../middleware/user');
+const { getCategoryById } = require('../middleware/category');
 
 // Params
 router.param('userId', getUserById);

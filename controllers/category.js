@@ -1,21 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const { check } = require('express-validator');
-const Category = require('../models/category');
-
-// @desc: get a category by it's id
-exports.getCategoryById = (req, res, next, id) => {
-  Category.findById(id).exec((err, category) => {
-    if (err) {
-      return res.status(400).json({
-        error: 'Category not found!',
-      });
-    }
-    req.category = category;
-    next();
-  });
-};
-
 // @desc: create a new categoy
 exports.createCategory = (req, res) => {
   const category = new Category(req.body);

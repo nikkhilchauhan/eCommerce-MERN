@@ -1,22 +1,5 @@
-const { validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
-
-const User = require('../models/user');
-const Order = require('../models/order');
-
-//MIDDLEWARE
-exports.getUserById = (req, res, next, id) => {
-  User.findById(id).exec((error, user) => {
-    if (error || !user) {
-      return res.status(400).json({
-        error: 'no user found in database!',
-      });
-    }
-    req.profile = user;
-    next();
-  });
-};
+const User = require('../models/User');
+const Order = require('../models/Order');
 
 //@desc: Get user by id
 exports.getUser = (req, res) => {

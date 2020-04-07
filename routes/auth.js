@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
 const { signout, signup, signin } = require('../controllers/auth');
-const { isSignedIn } = require('../middleware/auth');
 
 // @route: POST /api/signup
 // @desc: signup a user

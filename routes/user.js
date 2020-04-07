@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator');
 const {
-  getUserById,
   getUser,
   updateUser,
   userPurchaseList,
 } = require('../controllers/user');
-const { isSignedIn, isAuthenticated, isAdmin } = require('../middleware/auth');
-const User = require('../models/user');
+const { isSignedIn, isAuthenticated } = require('../middleware/auth');
+const { getUserById } = require('../middleware/user');
 
 // Params
 router.param('userId', getUserById);
