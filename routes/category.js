@@ -16,7 +16,9 @@ const { getUserById } = require('../controllers/user');
 router.param('userId', getUserById);
 router.param('categoryId', getCategoryById);
 
-// Actuall routes goes here
+// @route: POST /api/category/create/:userId
+// @desc: create a new category
+// @access: private/only admin
 router.post(
   '/category/create/:userId',
   isSignedIn,
@@ -28,6 +30,9 @@ router.post(
 router.get('/category/:categyId', getCategory);
 router.get('/categories', getAllCategory);
 
+// @route: POST /api/category/:categoryId/:userId
+// @desc: update a category
+// @access: private/only admin
 router.put(
   '/category/:categoryId/:userId',
   isSignedIn,
@@ -36,6 +41,9 @@ router.put(
   updateCategory
 );
 
+// @route: POST /api/category/:categoryId/:userId
+// @desc: delete a category
+// @access: private/only admin
 router.delete(
   '/category/:categoryId/:userId',
   isSignedIn,

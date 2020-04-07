@@ -28,18 +28,6 @@ exports.getUser = (req, res) => {
   return res.json(req.profile);
 };
 
-// @desc: Get all users profile
-// exports.getAllUsers = (req, res) => {
-//   User.find().exec((err, users) => {
-//     if (err || !users) {
-//       return res.status(400).json({
-//         error: 'no users found!',
-//       });
-//     }
-//     res.json(users);
-//   });
-// };
-
 // @desc: update user profile
 exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
@@ -76,7 +64,7 @@ exports.userPurchaseList = (req, res) => {
     });
 };
 
-// Put purchas list
+// @desc: Put purchas list
 exports.pushOrderInPurchaseList = (req, res) => {
   let purchases = [];
   req,

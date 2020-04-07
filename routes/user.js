@@ -4,24 +4,19 @@ const { check } = require('express-validator');
 const {
   getUserById,
   getUser,
-  getAllUsers,
   updateUser,
   userPurchaseList,
 } = require('../controllers/user');
 const { isSignedIn, isAuthenticated, isAdmin } = require('../middleware/auth');
 const User = require('../models/user');
 
+// Params
 router.param('userId', getUserById);
 
 // @route: GET /api/user/:id
 // @desc: get user
 // @access: private
 router.get('/user/:userId', isSignedIn, isAuthenticated, getUser);
-
-// @route: GET /api/users
-// @desc: get all users
-// @access: public
-// router.get('/users', getAllUsers);
 
 // @route: GET /api/user/:userId
 // @desc: update user profile

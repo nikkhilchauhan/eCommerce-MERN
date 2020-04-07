@@ -3,6 +3,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const Category = require('../models/category');
 
+// @desc: get a category by it's id
 exports.getCategoryById = (req, res, next, id) => {
   Category.findById(id).exec((err, category) => {
     if (err) {
@@ -15,6 +16,7 @@ exports.getCategoryById = (req, res, next, id) => {
   });
 };
 
+// @desc: create a new categoy
 exports.createCategory = (req, res) => {
   const category = new Category(req.body);
   category.save((err, category) => {
@@ -27,10 +29,12 @@ exports.createCategory = (req, res) => {
   });
 };
 
+// @desc: get a category
 exports.getCategory = (req, res) => {
   return res.json(req.category);
 };
 
+// @desc: get all category
 exports.getAllCategory = (req, res) => {
   Category.find().exec((err, items) => {
     if (err) {
@@ -42,6 +46,7 @@ exports.getAllCategory = (req, res) => {
   });
 };
 
+// @desc: update a category
 exports.updateCategory = (req, res) => {
   const category = req.category;
   category.name = req.body.name;
@@ -55,6 +60,7 @@ exports.updateCategory = (req, res) => {
   });
 };
 
+// @desc: delete a category
 exports.deleteCategory = (req, res) => {
   const category = req.category;
   category.remove((err, category) => {
