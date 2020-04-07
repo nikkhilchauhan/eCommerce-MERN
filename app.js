@@ -20,7 +20,7 @@ mongoose
     console.log(error);
   });
 
-// Middlewares(like cookieParser helps to put/delete cookie in browser)
+// Middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
@@ -35,7 +35,4 @@ app.use('/api', require('./routes/product'));
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`App is running at http://localhost:${PORT}/`);
-});
-app.get('/', (req, res) => {
-  res.send('You are genius');
 });
