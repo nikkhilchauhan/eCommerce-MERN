@@ -8,16 +8,15 @@ exports.signup = (req, res) => {
   // Handling validations
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({
-      error: errors.array()[0].msg,
+    return res.status(400).json({
+      error: errors.array(),
     });
   }
-
   // Saving to database
   const user = new User(req.body);
   user.save((error, user) => {
     if (error) {
-      return res.status(422).json({
+      return res.status(400).json({
         error: 'failed to save user in Database!',
       });
     }
@@ -37,7 +36,7 @@ exports.signin = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({
-      error: errors.array()[0].msg,
+      error: errors.array(),
     });
   }
   User.findOne({ email }, (error, user) => {
