@@ -3,30 +3,30 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 //@desc: SignUp a user
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   // console.log('REQUEST BODY', req.body);
   // Handling validations
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      error: errors.array(),
+      error: errors.array()[0].msg,
     });
   }
   // Saving to database
   const user = new User(req.body);
-  user.save((error, user) => {
-    if (error) {
-      return res.status(400).json({
-        error: 'failed to save user in Database!',
-      });
-    }
-    res.json({
+  try {
+    await user.save();
+    return res.json({
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
       id: user._id,
     });
-  });
+  } catch (error) {
+    return res.status(400).json({
+      error: 'failed to save user in Database!',
+    });
+  }
 };
 
 // @desc: SignIn a user
@@ -35,8 +35,8 @@ exports.signin = (req, res) => {
   // Handling validations
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({
-      error: errors.array(),
+    return res.status(400).json({
+      error: errors.array()[0].msg,
     });
   }
   User.findOne({ email }, (error, user) => {
