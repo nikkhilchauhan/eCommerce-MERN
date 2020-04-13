@@ -16,15 +16,15 @@ const Signup = () => {
   const { first_name, last_name, email, password, error, isSuccess } = values;
 
   const handleChange = (name) => (event) => {
-    setValues({ ...values, error: '', [name]: event.target.value });
+    setValues({ ...values, error: false, [name]: event.target.value });
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, error: '' });
+    setValues({ ...values, error: false });
     signup({ first_name, last_name, email, password })
       .then((data) => {
-        if (data?.error) {
+        if (data.error) {
           setValues({ ...values, error: data.error, isSuccess: false });
         } else {
           setValues({

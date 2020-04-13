@@ -11,12 +11,12 @@ router.post(
   [
     check(
       'first_name',
-      'first_name must be at least 3 character long!'
-    ).isLength({ max: 32 }),
+      'First name must be at least 3 character long!'
+    ).isLength({ min: 3, max: 32 }),
     check(
       'last_name',
-      'last_name must be at least 3 character long!'
-    ).isLength({ max: 32 }),
+      'Last name must be at least 3 character long!'
+    ).isLength({ min: 3, max: 32 }),
     check('email', 'email is not valid!').isEmail(),
     check('password', 'password must be at least 6 character long!').isLength({
       min: 6,
