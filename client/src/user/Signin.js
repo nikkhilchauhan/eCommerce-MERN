@@ -9,11 +9,11 @@ const Signin = () => {
     password: '',
     error: '',
     didRedirect: false,
-    isSuccess: false,
-    isLoading: true,
+    isLoading: false,
   });
 
-  const { email, password, error, didRedirect, isSuccess, isLoading } = values;
+  const { email, password, error, didRedirect, isLoading } = values;
+  // Checks if user is already authenticated
   const { user } = isAutheticated();
 
   const changeHandler = (name) => (event) => {
@@ -22,19 +22,23 @@ const Signin = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, error: '', isSuccess: false, isLoading: true });
+    setValues({ ...values, error: '', isLoading: true });
     signin({ email, password })
       .then((data) => {
         if (data.error) {
           setValues({ ...values, error: data.error, isLoading: false });
         } else {
-          // Because there a next in authenticate function we can fire up a callback
-          authenticate(data, () => {
-            setValues({
-              ...values,
-              didRedirect: true,
-            });
-          });
+          authenticate(
+            data,
+            // Because there a next in authenticate function we can fire up a callback
+            () => {
+              setValues({
+                ...values,
+                didRedirect: true,
+                isLoading: false,
+              });
+            }
+          );
         }
       })
       .catch(console.log('Signin request failed'));

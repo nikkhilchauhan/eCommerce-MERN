@@ -17,8 +17,8 @@ router.post(
       'last_name',
       'Last name must be at least 3 character long!'
     ).isLength({ min: 3, max: 32 }),
-    check('email', 'email is not valid!').isEmail(),
-    check('password', 'password must be at least 6 character long!').isLength({
+    check('email', 'Email is not valid!').isEmail(),
+    check('password', 'Password must be at least 6 character long!').isLength({
       min: 6,
     }),
   ],
@@ -31,8 +31,8 @@ router.post(
 router.post(
   '/signin',
   [
-    check('email', 'invalid credentials!').isEmail(),
-    check('password', 'invalid is credentials!').isLength({
+    check('email', 'Invalid credentials!').isEmail(),
+    check('password', 'Invalid credentials!').isLength({
       min: 6,
     }),
   ],
