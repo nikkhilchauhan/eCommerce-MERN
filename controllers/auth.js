@@ -24,7 +24,7 @@ exports.signup = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      error: 'failed to save user in Database!',
+      error: 'Failed to save user in Database!',
     });
   }
 };
@@ -42,12 +42,12 @@ exports.signin = (req, res) => {
   User.findOne({ email }, (error, user) => {
     if (error || !user) {
       return res.status(400).json({
-        error: 'no user found, please signup first!',
+        error: 'No user found, please signup first!',
       });
     }
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: 'invalid credentials!',
+        error: 'Invalid credentials!',
       });
     }
     // Creating token
