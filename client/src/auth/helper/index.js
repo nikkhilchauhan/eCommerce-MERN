@@ -1,4 +1,4 @@
-// Register a user
+// Register a user & returns response
 export const signup = (user) => {
   return fetch('/api/signup', {
     method: 'POST',
@@ -14,7 +14,7 @@ export const signup = (user) => {
     .catch((err) => console.log(err));
 };
 
-// Signin a user
+// Signin a user & return response
 export const signin = (user) => {
   return fetch('/api/signin', {
     method: 'POST',
@@ -52,7 +52,7 @@ export const signout = (next) => {
   }
 };
 
-//  Check for Authentication - if there is Token in local storage
+//  Check for Authentication - checks if there is Token&User in local storage & returns
 export const isAutheticated = () => {
   if (typeof window == 'undefined') {
     return false;
