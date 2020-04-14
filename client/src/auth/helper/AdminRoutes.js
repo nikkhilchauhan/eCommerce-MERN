@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { isAutheticated } from './index';
 
-const AdminRoute = ({ component: Component, ...rest }) => {
+const AdminRoute = ({ component: Component }) => {
   return (
     <Route
       render={(props) =>

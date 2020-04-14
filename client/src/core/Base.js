@@ -12,11 +12,12 @@ const Base = ({
       <Navbar />
       <div className='container-fluid'>
         <div className='jubotron bg-dark text-white text-center'>
-          <h2 className='display-4'>{title}</h2>
+          <h2 className='display-5'>{title}</h2>
           <p className='lead'>{description}</p>
         </div>
         <div className={className}>{children}</div>
       </div>
+      {/* Footer */}
       <footer className='bg-dark mt-auto py-3'>
         <div className='container-fluid bg-success text-white text-center py-3'>
           <h4>Got questions?, feel free to reach us out.</h4>
