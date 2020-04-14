@@ -79,9 +79,9 @@ const Signin = () => {
   const performRedirect = () => {
     if (didRedirect) {
       if (user && user.is_admin === 1) {
-        return <p>Redirects to ADMIN</p>;
+        return <Redirect to='/admin/dashboard' />;
       } else {
-        return <p>Redirects to user DASHBOARD</p>;
+        return <Redirect to='/user/dashboard' />;
       }
     }
     if (isAutheticated()) {

@@ -28,24 +28,30 @@ const Navbar = ({ history }) => {
             Cart
           </Link>
         </li>
-        <li className='nav-item'>
-          <Link
-            style={currentTab(history, '/user/dashboard')}
-            to='/user/dashboard'
-            className='nav-link'
-          >
-            Dashboard
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <Link
-            style={currentTab(history, '/admin')}
-            to='/admin'
-            className='nav-link'
-          >
-            Admin
-          </Link>
-        </li>
+        {/* User Dashboard Link */}
+        {isAutheticated() && isAutheticated().user.is_admin === 0 && (
+          <li className='nav-item'>
+            <Link
+              style={currentTab(history, '/user/dashboard')}
+              to='/user/dashboard'
+              className='nav-link'
+            >
+              U.Dashboard
+            </Link>
+          </li>
+        )}
+        {/* Admin Dashboard Link */}
+        {isAutheticated() && isAutheticated().user.is_admin === 1 && (
+          <li className='nav-item'>
+            <Link
+              style={currentTab(history, '/admin/dashboard')}
+              to='/admin/dashboard'
+              className='nav-link'
+            >
+              A.Dashboard
+            </Link>
+          </li>
+        )}
         {/* SignIn & SignOut Links */}
         {!isAutheticated() && (
           <Fragment>
