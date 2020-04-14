@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { signout, isAutheticated } from '../auth/helper';
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
@@ -45,33 +46,44 @@ const Navbar = ({ history }) => {
             Admin
           </Link>
         </li>
-        <li className='nav-item'>
-          <Link
-            style={currentTab(history, '/signup')}
-            to='/signup'
-            className='nav-link'
-          >
-            Signup
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <Link
-            style={currentTab(history, '/signin')}
-            to='/signin'
-            className='nav-link'
-          >
-            Signin
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <Link
-            style={currentTab(history, '/logout')}
-            to='/logout'
-            className='nav-link'
-          >
-            Logout
-          </Link>
-        </li>
+        {/* SignIn & SignOut Links */}
+        {!isAutheticated() && (
+          <Fragment>
+            <li className='nav-item'>
+              <Link
+                style={currentTab(history, '/signup')}
+                to='/signup'
+                className='nav-link'
+              >
+                Signup
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                style={currentTab(history, '/signin')}
+                to='/signin'
+                className='nav-link'
+              >
+                Signin
+              </Link>
+            </li>
+          </Fragment>
+        )}
+        {/* Logout Link */}
+        {isAutheticated() && (
+          <li className='nav-item'>
+            <span
+              className='nav-link text-warning'
+              onClick={() => {
+                signout(() => {
+                  history.push('/');
+                });
+              }}
+            >
+              Signout
+            </span>
+          </li>
+        )}
       </ul>
     </div>
   );
