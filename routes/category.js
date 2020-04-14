@@ -27,7 +27,7 @@ router.post(
   createCategory
 );
 
-router.get('/category/:categyId', getCategory);
+router.get('/category/:categoryId', getCategory);
 router.get('/categories', getAllCategory);
 
 // @route: POST /api/category/:categoryId/:userId
