@@ -12,27 +12,27 @@ const AdminDashboard = () => {
     return (
       <div className='card'>
         <h6 className='card-header bg-dark text-white border'>
-          Admin Navigation
+          <i className='fas fa-user-lock'></i> Admin Navigation
         </h6>
         <ul className='list-group'>
           <li className='list-group-item'>
             <Link to='/admin/create/category' className='nav-link text-info'>
-              Create categories
+              <i className='fas fa-edit'></i> Create categories
             </Link>
           </li>
           <li className='list-group-item'>
             <Link to='/admin/create/product' className='nav-link text-info'>
-              Create products
+              <i className='fas fa-edit'></i> Create products
             </Link>
           </li>
           <li className='list-group-item'>
             <Link to='/admin/products' className='nav-link text-info'>
-              Manage Products
+              <i className='fas fa-exchange-alt'></i> Manage Products
             </Link>
           </li>
           <li className='list-group-item'>
             <Link to='/admin/orders' className='nav-link text-info'>
-              Manage Orders
+              <i className='fas fa-exchange-alt'></i> Manage Orders
             </Link>
           </li>
         </ul>
