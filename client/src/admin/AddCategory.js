@@ -23,13 +23,18 @@ const AddCategory = () => {
     event.preventDefault();
     setState({ ...state, error: '', success: false });
     //   name is passed as Object because we've used JSON.stringify in createCategory()
-    createCategory(user._id, authToken, { name }).then((data) => {
-      if (data?.error) {
-        setState({ ...state, error: data.error });
-      } else {
-        setState({ ...state, name: '', error: '', success: true });
-      }
-    });
+    createCategory(user._id, authToken, { name })
+      .then((data) => {
+        if (data.error) {
+          setState({ ...state, error: data.error });
+        } else {
+          console.log('Success');
+          setState({ ...state, name: '', error: '', success: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const goBack = () => {

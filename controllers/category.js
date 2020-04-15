@@ -1,5 +1,6 @@
-// @Note: req.category is comming from getCategoryById Middleware
+const Category = require('../models/category');
 
+// @Note: req.category is comming from getCategoryById Middleware
 // @desc: create a new categoy
 exports.createCategory = (req, res) => {
   const category = new Category(req.body);
@@ -37,7 +38,7 @@ exports.updateCategory = (req, res) => {
   category.save((err, updatedCategory) => {
     if (err) {
       return res.status(400).json({
-        error: 'Failed to update category!',
+        error: 'Failed to update category or same category already exists!',
       });
     }
     res.json(updatedCategory);
@@ -56,5 +57,18 @@ exports.deleteCategory = (req, res) => {
     res.json({
       message: `Successfully deletd: ${category}`,
     });
+  });
+};
+
+// Middleware
+exports.getCategoryById = (req, res, next, id) => {
+  Category.findById(id).exec((err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Category not found!',
+      });
+    }
+    req.category = category;
+    next();
   });
 };
