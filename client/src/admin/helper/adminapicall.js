@@ -1,6 +1,5 @@
 // Create Category
-export const createCategory = (userId, authToken, category) => {
-  console.log(JSON.stringify({ userId, authToken, category }));
+export const createCategory = (userId, authToken, name) => {
   return fetch(`/api/category/create/${userId}`, {
     method: 'POST',
     headers: {
@@ -8,7 +7,7 @@ export const createCategory = (userId, authToken, category) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
-    body: JSON.stringify(category),
+    body: JSON.stringify(name),
   })
     .then((response) => {
       console.log(response.json());
