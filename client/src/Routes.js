@@ -13,16 +13,27 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/signup' component={Signup} />
-        <Route exact path='/signin' component={Signin} />
-        <PrivateRoute exact path='/user/dashboard' component={UserDashBoard} />
-        <AdminRoute exact path='/admin/dashboard' component={AdminDashBoard} />
-        <AdminRoute
+        <Route
           exact
-          path='/admin/create/category'
-          component={AddCategory}
+          path='/'
+          render={() => <Home title='eCommerce | Home' />}
         />
+        <Route
+          exact
+          path='/signup'
+          render={() => <Signup title='eCommerce | Signup' />}
+        />
+        <Route
+          exact
+          path='/signin'
+          render={() => <Signin title='eCommerce | Signin' />}
+        />
+
+        <PrivateRoute exact path='/user/dashboard' component={UserDashBoard} />
+
+        <AdminRoute exact path='/admin/dashboard' component={AdminDashBoard} />
+
+        <AdminRoute exact component={AddCategory} />
       </Switch>
     </BrowserRouter>
   );

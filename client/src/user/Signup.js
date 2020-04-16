@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
 import { signup } from '../auth/helper';
 import { Link } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
+  useEffect(() => {
+    document.title = props.title;
+  }, []);
+
   const [values, setValues] = useState({
     first_name: '',
     last_name: '',

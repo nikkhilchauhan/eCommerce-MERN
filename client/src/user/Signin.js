@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
 import { Link, Redirect } from 'react-router-dom';
 import { signin, authenticate, isAutheticated } from '../auth/helper/';
 
-const Signin = () => {
+const Signin = (props) => {
+  useEffect(() => {
+    document.title = props.title;
+  }, []);
   const [values, setValues] = useState({
     email: 'nikhilchauhan0018@gmail.com',
     password: '123456',
