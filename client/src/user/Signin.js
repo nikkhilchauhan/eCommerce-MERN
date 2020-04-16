@@ -109,12 +109,12 @@ const Signin = (props) => {
   const errorMessage = () => {
     return (
       <div className='row'>
-        <div className='col-md-6 offset-sm-3 text-left'>
+        <div className='col-md-8 offset-sm-3 text-left'>
           <div
             className='alert alert-danger'
             style={{ display: error ? '' : 'none' }}
           >
-            {error}
+            <i className='fas fa-exclamation-circle'></i> {error}
           </div>
         </div>
       </div>

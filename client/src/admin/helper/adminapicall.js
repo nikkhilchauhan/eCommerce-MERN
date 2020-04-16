@@ -10,7 +10,6 @@ export const createCategory = (userId, authToken, name) => {
     body: JSON.stringify(name),
   })
     .then((response) => {
-      console.log(response.json());
       return response.json();
     })
     .catch((err) => console.log(err));

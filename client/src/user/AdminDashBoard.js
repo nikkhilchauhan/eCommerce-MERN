@@ -4,7 +4,6 @@ import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
 
 const AdminDashboard = (props) => {
-  console.log(props);
   useEffect(() => {
     document.title = 'eCommerce | A.Dashboard';
   }, []);
