@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Signup = (props) => {
   useEffect(() => {
-    document.title = props.title;
+    document.title = 'eCommerce | Signup';
   }, []);
 
   const [values, setValues] = useState({

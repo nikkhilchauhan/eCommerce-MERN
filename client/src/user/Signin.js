@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { signin, authenticate, isAutheticated } from '../auth/helper/';
 
 const Signin = (props) => {
   useEffect(() => {
-    document.title = props.title;
+    document.title = 'eCommerce | Signin';
   }, []);
   const [values, setValues] = useState({
     email: 'nikhilchauhan0018@gmail.com',

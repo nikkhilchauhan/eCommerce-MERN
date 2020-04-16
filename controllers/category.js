@@ -7,7 +7,8 @@ exports.createCategory = (req, res) => {
   category.save((err, category) => {
     if (err) {
       return res.status(400).json({
-        error: 'Failed to save category in database!',
+        error:
+          'Failed to save category in database or same category already exists!',
       });
     }
     res.json({ category });
