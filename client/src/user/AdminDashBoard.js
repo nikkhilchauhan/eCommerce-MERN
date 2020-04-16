@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Base from '../core/Base';
 import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
 
-const AdminDashboard = () => {
+const AdminDashboard = (props) => {
+  console.log(props);
+  useEffect(() => {
+    document.title = 'eCommerce | A.Dashboard';
+  }, []);
+
   const {
-    user: { first_name, last_name, email, id_admin },
+    user: { first_name, last_name, email },
   } = isAutheticated();
 
   const adminLeftSide = () => {

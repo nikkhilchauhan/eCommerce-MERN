@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
 import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
 import { createCategory } from './helper/adminapicall';
 
-const AddCategory = () => {
+const AddCategory = (props) => {
+  useEffect(() => {
+    document.title = 'eCommerce | Create Category';
+  }, []);
   const [state, setState] = useState({
     name: '',
     error: false,
