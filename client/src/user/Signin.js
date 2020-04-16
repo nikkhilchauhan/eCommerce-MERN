@@ -33,7 +33,7 @@ const Signin = (props) => {
         } else {
           authenticate(
             data,
-            // Because there a next in authenticate function we can fire up a callback
+            // Because there a next() in authenticate function we can fire up a callback
             () => {
               setValues({
                 ...values,

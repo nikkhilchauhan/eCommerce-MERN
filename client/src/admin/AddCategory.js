@@ -6,7 +6,7 @@ import { createCategory } from './helper/adminapicall';
 
 const AddCategory = (props) => {
   useEffect(() => {
-    document.title = 'eCommerce | Create Category';
+    document.title = 'eCommerce | Add Category';
   }, []);
 
   const [state, setState] = useState({
@@ -43,7 +43,7 @@ const AddCategory = (props) => {
   const goBack = () => {
     return (
       <div className='mt-1'>
-        <Link to='/admin/dashboard' className='btn btn-sm  mb-3'>
+        <Link to='/admin/dashboard' className='btn btn-sm text-white mb-3'>
           <i className='fas fa-backward'></i> Go Back
         </Link>
       </div>
