@@ -3,7 +3,7 @@ import Base from './Base';
 
 export default function Home(props) {
   useEffect(() => {
-    document.title = props.title;
+    document.title = 'eCommerce | Home';
   }, []);
 
   return (

@@ -7,10 +7,10 @@ const {
   getAllCategory,
   updateCategory,
   deleteCategory,
-  getCategoryById,
 } = require('../controllers/category');
 const { isSignedIn, isAuthenticated, isAdmin } = require('../middleware/auth');
 const { getUserById } = require('../middleware/user');
+const { getCategoryById } = require('../middleware/category');
 
 // Params
 router.param('userId', getUserById);

@@ -6,8 +6,9 @@ import { createCategory } from './helper/adminapicall';
 
 const AddCategory = (props) => {
   useEffect(() => {
-    document.title = 'eCommerce | Create Category';
+    document.title = 'eCommerce | Add Category';
   }, []);
+
   const [state, setState] = useState({
     name: '',
     error: false,
@@ -31,7 +32,6 @@ const AddCategory = (props) => {
         if (data.error) {
           setState({ ...state, error: data.error });
         } else {
-          console.log('Success');
           setState({ ...state, name: '', error: '', success: true });
         }
       })
@@ -43,7 +43,7 @@ const AddCategory = (props) => {
   const goBack = () => {
     return (
       <div className='mt-1'>
-        <Link to='/admin/dashboard' className='btn btn-sm  mb-3'>
+        <Link to='/admin/dashboard' className='btn btn-sm text-white mb-3'>
           <i className='fas fa-backward'></i> Go Back
         </Link>
       </div>
@@ -70,6 +70,37 @@ const AddCategory = (props) => {
     );
   };
 
+  const successMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-md-8 offset-sm-3 text-left'>
+          <div
+            className='alert alert-success'
+            style={{ display: success ? '' : 'none' }}
+          >
+            <i className='fas fa-check-circle'> </i> Category created
+            successfully.
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-md-8 offset-sm-3 text-left'>
+          <div
+            className='alert alert-danger'
+            style={{ display: error ? '' : 'none' }}
+          >
+            <i className='fas fa-exclamation-circle'></i> {error}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Base
       title='Create a category'
@@ -77,7 +108,8 @@ const AddCategory = (props) => {
       className='container bg-info p-5'
     >
       {goBack()}
-
+      {successMessage()}
+      {errorMessage()}
       <div className='row bg-white rounded'>
         <div className='col-md-8 offset-md-2'>{myCategoryForm()}</div>
       </div>

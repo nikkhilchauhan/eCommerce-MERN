@@ -4,7 +4,6 @@ import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
 
 const AdminDashboard = (props) => {
-  console.log(props);
   useEffect(() => {
     document.title = 'eCommerce | A.Dashboard';
   }, []);
@@ -22,7 +21,12 @@ const AdminDashboard = (props) => {
         <ul className='list-group'>
           <li className='list-group-item'>
             <Link to='/admin/create/category' className='nav-link text-info'>
-              <i className='fas fa-edit'></i> Create categories
+              <i className='fas fa-edit'></i>Add categories
+            </Link>
+          </li>
+          <li className='list-group-item'>
+            <Link to='/admin/categories' className='nav-link text-info'>
+              <i className='fas fa-edit'></i> Manage categories
             </Link>
           </li>
           <li className='list-group-item'>

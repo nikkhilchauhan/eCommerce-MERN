@@ -105,7 +105,7 @@ exports.getAllUniqueCategories = (req, res) => {
     if (err) {
       return res.status(400).json({ error: 'No category found!' });
     }
-    res.json(category);
+    res.json(categories);
   });
 };
 

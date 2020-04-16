@@ -7,7 +7,8 @@ exports.createCategory = (req, res) => {
   category.save((err, category) => {
     if (err) {
       return res.status(400).json({
-        error: 'Failed to save category in database!',
+        error:
+          'Failed to save category in database or same category already exists!',
       });
     }
     res.json({ category });
@@ -57,18 +58,5 @@ exports.deleteCategory = (req, res) => {
     res.json({
       message: `Successfully deletd: ${category}`,
     });
-  });
-};
-
-// Middleware
-exports.getCategoryById = (req, res, next, id) => {
-  Category.findById(id).exec((err, category) => {
-    if (err) {
-      return res.status(400).json({
-        error: 'Category not found!',
-      });
-    }
-    req.category = category;
-    next();
   });
 };

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { signin, authenticate, isAutheticated } from '../auth/helper/';
 
 const Signin = (props) => {
   useEffect(() => {
-    document.title = props.title;
+    document.title = 'eCommerce | Signin';
   }, []);
   const [values, setValues] = useState({
     email: 'nikhilchauhan0018@gmail.com',
@@ -33,7 +33,7 @@ const Signin = (props) => {
         } else {
           authenticate(
             data,
-            // Because there a next in authenticate function we can fire up a callback
+            // Because there a next() in authenticate function we can fire up a callback
             () => {
               setValues({
                 ...values,
@@ -109,12 +109,12 @@ const Signin = (props) => {
   const errorMessage = () => {
     return (
       <div className='row'>
-        <div className='col-md-6 offset-sm-3 text-left'>
+        <div className='col-md-8 offset-sm-3 text-left'>
           <div
             className='alert alert-danger'
             style={{ display: error ? '' : 'none' }}
           >
-            {error}
+            <i className='fas fa-exclamation-circle'></i> {error}
           </div>
         </div>
       </div>
