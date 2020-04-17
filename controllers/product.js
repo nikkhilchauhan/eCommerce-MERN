@@ -71,7 +71,7 @@ exports.updateProduct = (req, res) => {
     if (file.photo) {
       if (file.photo.size > 3000000) {
         return res.status(400).json({
-          error: 'Too big file size. Must be less than 3Mb.',
+          error: 'Too big file size. Must be less than 3Mb!',
         });
       }
       product.photo.data = fs.readFileSync(file.photo.path);

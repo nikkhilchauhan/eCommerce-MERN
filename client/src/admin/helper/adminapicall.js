@@ -55,7 +55,7 @@ export const getProducts = () => {
 
 // Delete a product
 export const deleteProduct = (userId, authToken, productId) => {
-  return fetch(`/api/${productId}/${userId}`, {
+  return fetch(`/api/product/${productId}/${userId}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',
