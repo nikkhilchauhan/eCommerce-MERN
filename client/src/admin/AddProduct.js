@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Base from '../core/Base';
 import { Link } from 'react-router-dom';
-import { getCategories } from './helper/adminapicall';
+import { getCategories, createProduct } from './helper/adminapicall';
+import { isAutheticated } from '../auth/helper';
 
 const AddProduct = () => {
+  const { user, authToken } = isAutheticated();
+
   useEffect(() => {
     document.title = 'eCommerce | Add Product';
     preLoad();
@@ -13,14 +16,12 @@ const AddProduct = () => {
     name: '',
     description: '',
     price: '',
-    category: '',
-    categories: '',
+    categories: [],
     stock: '',
     photo: '',
     loading: false,
     error: '',
     createdProduct: '',
-    getRedirect: false,
     formData: '',
   });
 
@@ -28,14 +29,11 @@ const AddProduct = () => {
     name,
     description,
     price,
-    category,
     categories,
     stock,
-    photo,
     loading,
     error,
     createdProduct,
-    getRedirect,
     formData,
   } = state;
 
@@ -51,14 +49,39 @@ const AddProduct = () => {
   };
 
   const handleChange = (name) => (event) => {
-    setState({ ...state, [name]: event.target.value });
+    const value = name === 'photo' ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
+    setState({ ...state, [name]: value });
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setState({ ...state, error: '', loading: true });
+    createProduct(user._id, authToken, formData)
+      .then((data) => {
+        if (data.error) {
+          setState({ ...state, error: data.error });
+        } else {
+          setState({
+            ...state,
+            name: '',
+            description: '',
+            price: '',
+            categories: '',
+            photo: '',
+            stock: '',
+            loading: false,
+            error: false,
+            createdProduct: data.name,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const createProductForm = () => (
     <form>
-      <span>Post photo</span>
+      <span>Product image</span>
       <div className='form-group'>
         <label className='btn btn-block btn-success'>
           <input
@@ -75,7 +98,7 @@ const AddProduct = () => {
           onChange={handleChange('name')}
           name='photo'
           className='form-control'
-          placeholder='Name'
+          placeholder='Product name'
           value={name}
         />
       </div>
@@ -103,7 +126,7 @@ const AddProduct = () => {
           className='form-control'
           placeholder='Category'
         >
-          <option>Select</option>
+          <option>Select category</option>
           {categories &&
             categories.map((cate, index) => (
               <option key={index} value={cate._id}>
@@ -137,17 +160,66 @@ const AddProduct = () => {
       </div>
     );
   };
+
+  const successMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12 text-left'>
+          <div
+            className='alert alert-success'
+            style={{ display: createdProduct ? '' : 'none' }}
+          >
+            <i className='fas fa-check-circle'> </i> Product created
+            successfully.
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12  text-left'>
+          <div
+            className='alert alert-danger'
+            style={{ display: error ? '' : 'none' }}
+          >
+            <i className='fas fa-exclamation-circle'></i> {error}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className='row'>
+          <div className='col-12  text-left'>
+            <div className='alert alert-info'>
+              <h2>Loading...</h2>
+            </div>
+          </div>
+        </div>
+      )
+    );
+  };
   return (
     <Base
       title='Add Product page'
       description='Here you can add new products'
       className='bg-info container'
     >
-      {goBack()}
       <div className='row text-white rounded'>
-        <div className='col-mg-8 offset-md-2'>{createProductForm()}</div>
+        <div className='col-mg-8 offset-md-2'>
+          {goBack()}
+          {loadingMessage()}
+          {errorMessage()}
+          {successMessage()}
+          {createProductForm()}
+        </div>
       </div>
-      {JSON.stringify(state)}
     </Base>
   );
 };

@@ -16,8 +16,9 @@ exports.createProduct = (req, res) => {
     // Destructure the fields
     // @Note: Here category means categoryID
     const { price, description, name, category, stock } = fields;
+    const { photo } = file;
 
-    if (!name || !description || !price || !category || !stock) {
+    if (!name || !description || !price || !category || !stock || !photo) {
       return res.status(400).json({
         error: 'Please include all fields!',
       });
@@ -25,7 +26,7 @@ exports.createProduct = (req, res) => {
 
     let product = new Product(fields);
 
-    //  Handle file here
+    //  Handle file here - if it has photo - but now i have made photo as mandetory
     if (file.photo) {
       if (file.photo.size > 3000000) {
         return res.status(400).json({
