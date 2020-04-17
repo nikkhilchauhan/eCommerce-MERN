@@ -37,3 +37,13 @@ p {
   padding: 0px;
   /* margin: 0px; */
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}

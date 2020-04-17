@@ -166,7 +166,8 @@ const ManageProducts = () => {
             <h5>{product.name}</h5>
             <p className='product-des'>{product.description}</p>
             <button className='btn btn-info rounded mb-2'>
-              <i className='fas fa-edit'></i> Update
+              <i className='fas fa-edit'></i>
+              <Link to={`/admin/update/product/${product._id}`}>Update</Link>
             </button>
             <button
               onClick={() => {
