@@ -37,3 +37,18 @@ p {
   padding: 0px;
   /* margin: 0px; */
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.form-control {
+  font-size: 14px;
+  font-weight: bold;
+}

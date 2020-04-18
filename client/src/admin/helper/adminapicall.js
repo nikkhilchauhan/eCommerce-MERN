@@ -81,7 +81,7 @@ export const getProduct = (productId) => {
 
 // Update a product
 export const updateProduct = (userId, productId, authToken, product) => {
-  return fetch(`/api/${productId}/${userId}`, {
+  return fetch(`/api/product/${productId}/${userId}`, {
     methode: 'PUT',
     headers: {
       Accept: 'application/json',
