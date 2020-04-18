@@ -6,33 +6,28 @@ import { getProducts, deleteProduct } from './helper/adminapicall';
 
 const ManageProducts = () => {
   const [state, setState] = useState({
-    switcher: 'UPDATE',
     products: [],
     success: '',
     error: '',
     loading: false,
   });
 
-  const { switcher, products, success, error, loading } = state;
+  const { products, success, error, loading } = state;
 
   useEffect(() => {
+    document.title = 'Home | Manage Products';
     preLoad();
   }, []);
 
   const { user, authToken } = isAutheticated();
 
-  const preLoad = () => {
-    getProducts()
-      .then((data) => {
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          setState({ ...state, products: data });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const preLoad = async () => {
+    try {
+      const products = await getProducts();
+      return setState({ ...state, products: products });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const deleteMyProduct = (productId) => {
@@ -56,7 +51,6 @@ const ManageProducts = () => {
           const filteredProducts = products.filter(
             (product) => product._id !== productId
           );
-          console.log(filteredProducts);
           setState({
             ...state,
             products: filteredProducts,
@@ -174,10 +168,13 @@ const ManageProducts = () => {
             </h5>
             <h5>{product.name}</h5>
             <p className='product-des'>{product.description}</p>
-            <button className='btn btn-info rounded mb-2'>
-              <i className='fas fa-edit'></i>
-              <Link to={`/admin/update/product/${product._id}`}>Update</Link>
-            </button>
+
+            <Link
+              to={`/admin/update/product/${product._id}`}
+              className='btn btn-info rounded mb-2'
+            >
+              <i className='fas fa-edit'></i> Update
+            </Link>
             <button
               onClick={() => {
                 deleteMyProduct(product._id);

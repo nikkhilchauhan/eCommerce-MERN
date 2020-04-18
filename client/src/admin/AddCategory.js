@@ -4,7 +4,7 @@ import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
 import { createCategory } from './helper/adminapicall';
 
-const AddCategory = (props) => {
+const AddCategory = () => {
   useEffect(() => {
     document.title = 'eCommerce | Add Category';
   }, []);

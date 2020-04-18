@@ -98,7 +98,9 @@ const Signin = (props) => {
         <div className='row'>
           <div className='col-md-6 offset-sm-3 text-left'>
             <div className='alert alert-info'>
-              <h2>Loading...</h2>
+              <h2>
+                <i class='fas fa-spinner'></i> Loading...
+              </h2>
             </div>
           </div>
         </div>
