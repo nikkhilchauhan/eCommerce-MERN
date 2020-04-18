@@ -52,8 +52,17 @@ const ManageProducts = () => {
             loading: false,
           });
         } else {
-          setState({ ...state, success: true, loading: false });
-          preLoad();
+          //  Using 'filter()' instead of calling 'preLoad()' to reduce server call
+          const filteredProducts = products.filter(
+            (product) => product._id !== productId
+          );
+          console.log(filteredProducts);
+          setState({
+            ...state,
+            products: filteredProducts,
+            success: true,
+            loading: false,
+          });
         }
       })
       .catch((err) => console.log(err));
