@@ -197,7 +197,9 @@ const AddProduct = () => {
         <div className='row'>
           <div className='col-12  text-left'>
             <div className='alert alert-info'>
-              <h2>Loading...</h2>
+              <h3>
+                <i className='fas fa-spinner'></i> Creating product...
+              </h3>
             </div>
           </div>
         </div>
