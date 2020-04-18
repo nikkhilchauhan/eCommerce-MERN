@@ -27,14 +27,14 @@ export const getCategories = () => {
 };
 
 // Create product
-export const createProduct = (userId, authToken, product) => {
+export const createProduct = (userId, authToken, formData) => {
   return fetch(`/api/product/create/${userId}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
-    body: product,
+    body: formData,
   })
     .then((response) => {
       return response.json();
@@ -80,14 +80,14 @@ export const getProduct = (productId) => {
 };
 
 // Update a product
-export const updateProduct = (userId, productId, authToken, product) => {
+export const updateProduct = (productId, userId, authToken, formData) => {
   return fetch(`/api/product/${productId}/${userId}`, {
     methode: 'PUT',
     headers: {
       Accept: 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
-    body: product,
+    body: formData,
   })
     .then((response) => {
       return response.json();

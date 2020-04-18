@@ -11,7 +11,7 @@ import { isAutheticated } from '../auth/helper';
 const UpdateProduct = ({ match }) => {
   const { user, authToken } = isAutheticated();
   useEffect(() => {
-    document.title = 'eCommerce | Add Product';
+    document.title = 'eCommerce | Update Product';
     preLoad(match.params.productId);
   }, []);
 
@@ -40,6 +40,7 @@ const UpdateProduct = ({ match }) => {
     updatedProduct,
     formData,
     updating,
+    photo,
   } = state;
 
   const preLoad = async (productId) => {
@@ -63,7 +64,6 @@ const UpdateProduct = ({ match }) => {
         price: price,
         category: category,
         stock: stock,
-        formData: new FormData(),
       });
     } catch (err) {
       console.log(err);
@@ -88,38 +88,25 @@ const UpdateProduct = ({ match }) => {
     setState({ ...state, [name]: value });
   };
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
     setState({ ...state, error: '', updating: true });
-    console.log(formData);
-    try {
-      const updatedProduct = await updateProduct(
-        user._id,
-        match.params.productId,
-        authToken,
-        formData
-      );
-      if (updatedProduct.error) {
-        return setState({
-          ...state,
-          error: updatedProduct.error,
-          updating: false,
-        });
-      }
-      const { name, description, price, stock, photo } = updatedProduct;
-      setState({
-        ...state,
-        name: '',
-        description: '',
-        price: '',
-        stock: '',
-        photo: '',
-        updatedProduct: name,
-        updating: false,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    updateProduct(match.params.productId, user._id, authToken, formData)
+      .then((data) => {
+        if (data.error) {
+          console.log('UPDATE FAILED...');
+          setState({ ...state, error: data.error, updating: false });
+        } else {
+          console.log('UPDATE SUCCESS...');
+          setState({
+            ...state,
+            error: '',
+            updating: false,
+            updatedProduct: data.name,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const updateProductForm = () => (
@@ -170,7 +157,6 @@ const UpdateProduct = ({ match }) => {
           placeholder='Category'
         >
           <option>Change category</option>
-          {/* <option value={category._id}>{category._id}</option> */}
           {categories &&
             categories.map((cate, index) => (
               <option key={index} value={cate._id}>
@@ -188,7 +174,6 @@ const UpdateProduct = ({ match }) => {
           value={stock}
         />
       </div>
-
       <button type='submit' onClick={onSubmit} className='btn btn-success mb-3'>
         Update Product
       </button>
@@ -243,7 +228,7 @@ const UpdateProduct = ({ match }) => {
             className='alert alert-danger'
             style={{ display: updating ? '' : 'none' }}
           >
-            <i class='fas fa-spinner'></i> Updating product...
+            <i className='fas fa-spinner'></i> Updating product...
           </div>
         </div>
       </div>
@@ -257,7 +242,7 @@ const UpdateProduct = ({ match }) => {
           <div className='col-12  text-left'>
             <div className='alert alert-info'>
               <h3>
-                <i class='fas fa-spinner'></i> Loading product...
+                <i className='fas fa-spinner'></i> Loading product...
               </h3>
             </div>
           </div>
@@ -265,6 +250,7 @@ const UpdateProduct = ({ match }) => {
       )
     );
   };
+
   return (
     <Base
       title='Update Product page'
