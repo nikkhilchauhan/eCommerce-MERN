@@ -52,7 +52,7 @@ const ManageProducts = () => {
             loading: false,
           });
         } else {
-          //  Using 'filter()' instead of calling 'preLoad()' to reduce server calls
+          //  Using 'filter()' instead of calling 'preLoad()' to reduce server call
           const filteredProducts = products.filter(
             (product) => product._id !== productId
           );
