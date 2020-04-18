@@ -67,7 +67,6 @@ const AddProduct = () => {
             name: '',
             description: '',
             price: '',
-            categories: '',
             photo: '',
             stock: '',
             loading: false,
