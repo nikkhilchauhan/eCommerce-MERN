@@ -55,16 +55,17 @@ const UpdateProduct = ({ match }) => {
           loading: false,
         });
       }
-      preLoadCategories();
       const { name, description, price, category, stock } = product;
       setState({
         ...state,
         name: name,
         description: description,
         price: price,
-        category: category,
+        category: category._id,
         stock: stock,
+        formData: new FormData(),
       });
+      preLoadCategories();
     } catch (err) {
       console.log(err);
     }
@@ -94,13 +95,15 @@ const UpdateProduct = ({ match }) => {
     updateProduct(match.params.productId, user._id, authToken, formData)
       .then((data) => {
         if (data.error) {
-          console.log('UPDATE FAILED...');
           setState({ ...state, error: data.error, updating: false });
         } else {
-          console.log('UPDATE SUCCESS...');
           setState({
             ...state,
+            name: '',
+            description: '',
+            price: '',
             error: '',
+            photo: '',
             updating: false,
             updatedProduct: data.name,
           });
