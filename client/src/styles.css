@@ -52,3 +52,7 @@ a:hover {
   font-size: 14px;
   font-weight: bold;
 }
+
+.main-height {
+  padding: 20px 10px;
+}

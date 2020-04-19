@@ -15,6 +15,63 @@ export const createCategory = (userId, authToken, name) => {
     .catch((err) => console.log(err));
 };
 
+// GET a category
+export const getCategory = async (categoryId) => {
+  try {
+    const category = await fetch(`/api/category/${categoryId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    return category.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// DELETE a category
+export const deleteCategory = async (userId, authToken, categoryId) => {
+  try {
+    const deletedCategory = await fetch(
+      `/api/category/${categoryId}/${userId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+    return deleteCategory.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// UPDATE a category
+export const updateCategory = async (userId, authToken, categoryId, name) => {
+  try {
+    const updatedCategory = await fetch(
+      `/api/category/${categoryId}/${userId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(name),
+      }
+    );
+    return updatedCategory.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // GET all categories
 export const getCategories = () => {
   return fetch(`/api/categories`, {
