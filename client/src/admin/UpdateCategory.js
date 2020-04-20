@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Base from '../core/Base';
 import { getCategory, updateCategory } from './helper/adminapicall';
 import { isAutheticated } from '../auth/helper';
@@ -26,8 +27,6 @@ const UpdateCategory = ({ match }) => {
         return setState({
           ...state,
           error: gotCategory.error,
-          success: false,
-          loading: false,
           category: [],
         });
       }
@@ -36,8 +35,6 @@ const UpdateCategory = ({ match }) => {
         category: gotCategory,
         name: gotCategory.name,
         error: '',
-        success: true,
-        loading: false,
       });
     } catch (err) {
       console.log(err);
@@ -76,12 +73,71 @@ const UpdateCategory = ({ match }) => {
     }
   };
 
+  const goBack = () => {
+    return (
+      <div className='mt-1'>
+        <Link to='/admin/categories' className='btn btn-sm text-white  mb-3'>
+          <i className='fas fa-backward'></i> Go Back
+        </Link>
+      </div>
+    );
+  };
+
+  const successMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12 text-left'>
+          <div
+            className='alert alert-success'
+            style={{ display: success ? '' : 'none' }}
+          >
+            <i className='fas fa-check-circle'> </i> Category updated
+            successfully.
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12  text-left'>
+          <div
+            className='alert alert-danger'
+            style={{ display: error ? '' : 'none' }}
+          >
+            <i className='fas fa-exclamation-circle'></i> {error}
+          </div>
+        </div>
+      </div>
+    );
+  };
+  const gettingCategoryMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12  text-left'>
+          <div
+            className='alert alert-danger'
+            style={{ display: !category ? '' : 'none' }}
+          >
+            <i className='fas fa-spinner'></i> Loading categories...
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Base
       title='Update category page'
       description='Here you can update your category'
       className='container bg-info'
     >
+      {goBack()}
+      {gettingCategoryMessage()}
+      {successMessage()}
+      {errorMessage()}
       <div className='row d-flex justify-content-center main-height'>
         <div className='col-6'>
           <div className='form-group'>
