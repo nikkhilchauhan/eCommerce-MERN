@@ -59,7 +59,7 @@ const ManageCategories = () => {
         });
       }
       const filteredCategory = categories.filter(
-        (category) => category._id != categoryId
+        (category) => category._id !== categoryId
       );
       setState({
         ...state,
