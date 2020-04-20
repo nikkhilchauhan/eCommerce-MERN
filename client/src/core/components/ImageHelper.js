@@ -8,7 +8,6 @@ const ImageHelper = ({ product }) => {
     <div className='rounded border border-success p-2'>
       <img
         src={imageURL}
-        alt='photo'
         style={{ width: '90%', height: 'auto' }}
         className='mb-3 rounded'
       />
