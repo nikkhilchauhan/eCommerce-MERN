@@ -13,6 +13,7 @@ import AddProduct from './admin/AddProduct';
 import ManageProducts from './admin/ManageProducts';
 import UpdateProduct from './admin/UpdateProduct';
 import NotFound from './core/NotFound';
+import UpdateCategory from './admin/UpdateCategory';
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -38,6 +39,11 @@ const Routes = () => {
           exact
           path='/admin/update/product/:productId'
           component={UpdateProduct}
+        />
+        <AdminRoute
+          exact
+          path='/admin/update/category/:categoryId'
+          component={UpdateCategory}
         />
         <Route to='' component={NotFound} />
       </Switch>
