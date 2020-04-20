@@ -45,7 +45,7 @@ export const deleteCategory = async (userId, authToken, categoryId) => {
         },
       }
     );
-    return deleteCategory.json();
+    return deletedCategory.json();
   } catch (error) {
     console.log(error);
   }
