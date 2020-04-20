@@ -29,8 +29,12 @@ router.post(
 
 // @route: GET /api/product/:productId
 // @desc: get a product by it's Id
-// @access: private
+// @access: Public
 router.get('/product/:productId', getProduct);
+
+// @route: GET /api/product/photo/:productId
+// @desc: get a product Image by it's Id
+// @access: Public
 router.get('/product/photo/:productId', photo);
 
 // @route: PUT /api/product/:productId/:userId
