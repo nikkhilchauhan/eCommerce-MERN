@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Base from './Base';
 import { loadCart } from './helper/CartHelper';
 import ProductCard from './components/ProductCard';
@@ -20,7 +21,7 @@ export default function Cart(props) {
   const loadItems = () => {
     return (
       <div>
-        <h3>This section is to load products</h3>
+        <h3 className='text-white'>This section is to load products</h3>
         {cartItems &&
           cartItems.map((item, index) => (
             <ProductCard
@@ -38,16 +39,32 @@ export default function Cart(props) {
   const loadCheckout = () => {
     return (
       <div>
-        <h3>This section is for checkout</h3>
+        <h3 className='text-white'>This section is for checkout</h3>
       </div>
     );
   };
 
+  const goBack = () => {
+    return (
+      <div className='mt-1'>
+        <Link to='/' className='btn btn-sm text-white mb-3'>
+          <i className='fas fa-backward'></i> Go Back
+        </Link>
+      </div>
+    );
+  };
   return (
-    <Base title='Cart Page' description='Hey, this is your cart '>
+    <Base
+      title='Cart Page'
+      description='Hey, this is your cart'
+      className='container'
+    >
+      <div className='row'>
+        <div className='col-12'>{goBack()}</div>
+      </div>
       <div className='row text-center'>
-        <div className='col-7'>{loadItems()}</div>
-        <div className='col-5'>{loadCheckout()}</div>
+        <div className='col-4'>{loadItems()}</div>
+        <div className='col-8'>{loadCheckout()}</div>
       </div>
     </Base>
   );
