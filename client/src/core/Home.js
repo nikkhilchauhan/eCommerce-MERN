@@ -15,6 +15,21 @@ export default function Home(props) {
     loadProducts();
   }, []);
 
+  const gettingProductsMessage = () => {
+    return (
+      <div className='row'>
+        <div className='col-12  text-left'>
+          <div
+            className='alert alert-danger'
+            style={{ display: !products ? '' : 'none' }}
+          >
+            <i className='fas fa-spinner'></i> Loading products...
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const loadProducts = async () => {
     try {
       const products = await getProducts();
@@ -29,6 +44,7 @@ export default function Home(props) {
 
   return (
     <Base title='Home Page' description='Welcome to T-shirt store'>
+      {gettingProductsMessage()}
       <div className='row text-center'>
         {products &&
           products.map((product, index) => (
