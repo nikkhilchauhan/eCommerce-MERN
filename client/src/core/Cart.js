@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Base from './Base';
 import { loadCart } from './helper/CartHelper';
 import ProductCard from './components/ProductCard';
+import StripeCheckout from './StripeCheckout';
 
 export default function Cart(props) {
   const [state, setState] = useState({
@@ -21,7 +22,7 @@ export default function Cart(props) {
   const loadItems = () => {
     return (
       <div>
-        <h3 className='text-white'>This section is to load products</h3>
+        <h3 className='text-white'>Your cart</h3>
         {cartItems &&
           cartItems.map((item, index) => (
             <ProductCard
@@ -38,9 +39,11 @@ export default function Cart(props) {
 
   const loadCheckout = () => {
     return (
-      <div>
-        <h3 className='text-white'>This section is for checkout</h3>
-      </div>
+      <StripeCheckout
+        cartItems={cartItems}
+        reload={reload}
+        setReload={setReload}
+      />
     );
   };
 
