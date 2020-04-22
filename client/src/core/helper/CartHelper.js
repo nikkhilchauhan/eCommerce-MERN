@@ -42,6 +42,9 @@ export const removeItemFromCart = (itemId) => {
 export const emptyCart = (next) => {
   if (typeof window !== undefined) {
     localStorage.removeItem('cart');
+    // To fix map() of undefined bug
+    let cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
     next();
   }
 };

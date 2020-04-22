@@ -1,21 +1,21 @@
 const { Order, productCart } = require('../models/Order');
+const User = require('../middleware/user');
 
-exports.pushOrderInPurchaseList = (req, res) => {
+exports.pushOrderInPurchaseList = (req, res, next) => {
   let purchases = [];
-  req,
-    body.oder.products.foEach((product) => {
-      purchases.unshift({
-        _id: product._id,
-        name: product.name,
-        description: product.description,
-        category: product.category,
-        quantity: product.quantity,
-        amount: req.body.order.amount,
-        transaction_id: req.body.order.transaction_id,
-      });
+  req.body.order.products.forEach((product) => {
+    purchases.unshift({
+      _id: product._id,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      quantity: product.quantity,
+      amount: req.body.order.amount,
+      transaction_id: req.body.order.transaction_id,
     });
+  });
   // save to database
-  User.findByIdAndUpdate(
+  User.findOneAndUpdate(
     {
       _id: req.profile._id,
     },
